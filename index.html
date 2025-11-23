@@ -150,7 +150,7 @@
                                 <!-- Your Inventory -->
                                 <div class="lg:col-span-1 bg-gray-900 border border-gray-700/50 rounded-lg shadow-xl p-6">
                                     <h3 class="text-2xl font-semibold text-white mb-4">Your Inventory</h3>
-                                    <input type="text" placeholder="Search your items..." class="w-full px-4 py-2 mb-4 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                    <input type="text" placeholder="Search your items..." class="w-full px-4 py-2 mb-4 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     <div id="your-inventory" class="inventory-grid grid grid-cols-3 sm:grid-cols-4 gap-3 h-96 overflow-y-auto pr-2">
                                         <!-- Your mock items here -->
                                     </div>
@@ -173,7 +173,7 @@
                                 <!-- Partner's Inventory -->
                                 <div class="lg:col-span-1 bg-gray-900 border border-gray-700/50 rounded-lg shadow-xl p-6">
                                     <h3 class="text-2xl font-semibold text-white mb-4">Partner's Inventory</h3>
-                                    <input type="text" placeholder="Search partner's items..." class="w-full px-4 py-2 mb-4 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                    <input type="text" placeholder="Search partner's items..." class="w-full px-4 py-2 mb-4 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                     <div id="partner-inventory" class="inventory-grid grid grid-cols-3 sm:grid-cols-4 gap-3 h-96 overflow-y-auto pr-2">
                                         <!-- Partner's mock items here -->
                                     </div>
@@ -300,19 +300,20 @@
     <script>
         // --- MOCK DATA ---
         // In a real app, this data would come from an API
+        // I've updated the image URLs to pull directly from backpack.tf
         const mockItems = [
-            { id: 1, name: 'Mann Co. Supply Crate Key', quality: 'unique', price: 2.50, img: 'https://placehold.co/128x128/333/eee?text=Key' },
-            { id: 2, name: 'Unusual Team Captain (Burning)', quality: 'unusual', price: 1200.00, img: 'https://placehold.co/128x128/333/eee?text=Hat' },
-            { id: 3, name: 'Refined Metal', quality: 'unique', price: 0.05, img: 'https://placehold.co/128x128/333/eee?text=Metal' },
-            { id: 4, name: 'Strange Rocket Launcher', quality: 'strange', price: 1.50, img: 'https://placehold.co/128x128/333/eee?text=Gun' },
-            { id: 5, name: 'Vintage Bill\'s Hat', quality: 'vintage', price: 5.00, img: 'https://placehold.co/128x128/333/eee?text=Hat' },
-            { id: 6, name: 'Genuine Frying Pan', quality: 'genuine', price: 3.00, img: 'https://placehold.co/128x128/333/eee?text=Pan' },
-            { id: 7, name: 'Collector\'s Medi Gun', quality: 'collectors', price: 25.00, img: 'https://placehold.co/128x128/333/eee?text=Medi+Gun' },
-            { id: 8, name: 'Haunted Ghosts Gibbus', quality: 'haunted', price: 0.50, img: 'https://placehold.co/128x128/333/eee?text=Gibbus' },
-            { id: 9, name: 'Australium Minigun', quality: 'strange', price: 45.00, img: 'https://placehold.co/128x128/333/eee?text=Aussie' },
-            { id: 10, name: 'Earbuds', quality: 'unique', price: 4.00, img: 'https://placehold.co/128x128/333/eee?text=Buds' },
-            { id: 11, name: 'Black Rose', quality: 'unique', price: 1.20, img: 'https://placehold.co/128x128/333/eee?text=Rose' },
-            { id: 12, name: 'Normal Scattergun', quality: 'normal', price: 0.01, img: 'https://placehold.co/128x128/333/eee?text=Gun' },
+            { id: 1, name: 'Mann Co. Supply Crate Key', quality: 'unique', price: 2.50, img: 'https://backpack.tf/images/items/192x192/5021_6.png' },
+            { id: 2, name: 'Unusual Team Captain (Burning)', quality: 'unusual', price: 1200.00, img: 'https://backpack.tf/images/items/192x192/378_5.png?particle=13' },
+            { id: 3, name: 'Refined Metal', quality: 'unique', price: 0.05, img: 'https://backpack.tf/images/items/192x192/5000_6.png' },
+            { id: 4, name: 'Strange Rocket Launcher', quality: 'strange', price: 1.50, img: 'https://backpack.tf/images/items/192x192/205_11.png' },
+            { id: 5, name: 'Vintage Bill\'s Hat', quality: 'vintage', price: 5.00, img: 'https://backpack.tf/images/items/192x192/122_8.png' },
+            { id: 6, name: 'Genuine Frying Pan', quality: 'genuine', price: 3.00, img: 'https://backpack.tf/images/items/192x192/264_4.png' },
+            { id: 7, name: 'Collector\'s Medi Gun', quality: 'collectors', price: 25.00, img: 'https://backpack.tf/images/items/192x192/29_14.png' },
+            { id: 8, name: 'Haunted Ghosts Gibbus', quality: 'haunted', price: 0.50, img: 'https://backpack.tf/images/items/192x192/115_13.png?particle=29' },
+            { id: 9, name: 'Australium Minigun', quality: 'strange', price: 45.00, img: 'https://backpack.tf/images/items/192x192/202_11_6.png' },
+            { id: 10, name: 'Earbuds', quality: 'unique', price: 4.00, img: 'https://backpack.tf/images/items/192x192/143_6.png' },
+            { id: 11, name: 'Black Rose', quality: 'unique', price: 1.20, img: 'https://backpack.tf/images/items/192x192/1000_6.png' },
+            { id: 12, name: 'Normal Scattergun', quality: 'normal', price: 0.01, img: 'https://backpack.tf/images/items/192x192/13_0.png' },
         ];
 
         // --- UTILITY FUNCTIONS ---
@@ -327,7 +328,7 @@
             const priceTag = showPrice ? `<div class="absolute top-1 right-1 bg-indigo-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-md">$${item.price.toFixed(2)}</div>` : '';
             return `
                 <div class="item-card relative bg-gray-900 border border-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-xl cursor-pointer border-2 ${'quality-' + item.quality}" data-item-id="${item.id}">
-                    <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square object-cover" onerror="this.src='https://placehold.co/128x128/222/FFF?text=Error'; this.onerror=null;">
+                    <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square object-cover" onerror="this.src='https://placehold.co/128x128/333/eee?text=Item'; this.onerror=null;">
                     <div class="absolute bottom-0 left-0 right-0 p-2 bg-black/50 backdrop-blur-sm">
                         <p class="text-white text-xs font-medium truncate" title="${item.name}">${item.name}</p>
                     </div>
@@ -344,7 +345,7 @@
         function createInventoryItem(item) {
              return `
                 <div class="item-card relative rounded-md overflow-hidden transition-all duration-200 hover:transform hover:scale-105 cursor-pointer border-2 ${'quality-' + item.quality} bg-gray-900" data-item-id="${item.id}">
-                    <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square object-cover" onerror="this.src='https://placehold.co/128x128/222/FFF?text=Error'; this.onerror=null;">
+                    <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square object-cover" onerror="this.src='https://placehold.co/128x128/333/eee?text=Item'; this.onerror=null;">
                 </div>
             `;
         }
@@ -360,7 +361,7 @@
             modalContent.innerHTML = `
                 <div class="flex flex-col md:flex-row gap-6">
                     <div class="md:w-1/3 flex-shrink-0">
-                        <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square rounded-lg border-4 ${'quality-' + item.quality}" onerror="this.src='https://placehold.co/128x128/222/FFF?text=Error'; this.onerror=null;">
+                        <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square rounded-lg border-4 ${'quality-' + item.quality}" onerror="this.src='https://placehold.co/128x128/333/eee?text=Item'; this.onerror=null;">
                     </div>
                     <div class="md:w-2/3">
                         <h3 class="text-2xl font-bold ${'quality-' + item.quality.charAt(0).toUpperCase() + item.quality.slice(1)}text-transparent bg-clip-text" style="color: ${getQualityColor(item.quality)}">${item.name}</h3>
@@ -449,9 +450,11 @@
             }, 200);
         }
 
-
-        // --- EVENT LISTENERS ---
-        document.addEventListener('DOMContentLoaded', () => {
+        /**
+         * Populates all item grids with data.
+         * @param {Array} items - An array of item objects.
+         */
+        function populateGrids(items) {
             const featuredGrid = document.getElementById('featured-items-grid');
             const buyGrid = document.getElementById('buy-items-grid');
             const yourInventory = document.getElementById('your-inventory');
@@ -459,15 +462,43 @@
             const sellInventory = document.getElementById('sell-inventory');
             
             // Populate Featured Items
-            featuredGrid.innerHTML = mockItems.slice(0, 6).map(item => createItemCard(item, true)).join('');
+            featuredGrid.innerHTML = items.slice(0, 6).map(item => createItemCard(item, true)).join('');
             
             // Populate Buy Grid (all items for demo)
-            buyGrid.innerHTML = mockItems.map(item => createItemCard(item, true)).join('');
+            buyGrid.innerHTML = items.map(item => createItemCard(item, true)).join('');
             
-            // Populate Mock Inventories
-            yourInventory.innerHTML = mockItems.slice(0, 8).map(createInventoryItem).join('');
-            partnerInventory.innerHTML = mockItems.slice(4, 12).map(createInventoryItem).join('');
-            sellInventory.innerHTML = mockItems.slice(0, 8).map(createInventoryItem).join('');
+            // Populate Mock Inventories (using slices of the same item list for demo)
+            yourInventory.innerHTML = items.slice(0, 8).map(createInventoryItem).join('');
+            partnerInventory.innerHTML = items.slice(4, 12).map(createInventoryItem).join('');
+            sellInventory.innerHTML = items.slice(0, 8).map(createInventoryItem).join('');
+        }
+
+        /**
+         * Tries to fetch items from a backend, falls back to mock data.
+         */
+        async function loadItems() {
+            try {
+                // This is where you would call your *own* backend API
+                const response = await fetch('/api/items'); // This will fail, which is expected
+                
+                if (!response.ok) {
+                    throw new Error('Backend not available'); // Trigger the catch block
+                }
+                
+                const items = await response.json();
+                populateGrids(items); // Populate with live data
+
+            } catch (error) {
+                console.warn('Could not fetch from backend. Using mock data.', error.message);
+                populateGrids(mockItems); // Populate with mock data as a fallback
+            }
+        }
+
+
+        // --- EVENT LISTENERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load items when the page is ready
+            loadItems();
 
             // --- Tab Switching Logic ---
             const tabButtons = document.querySelectorAll('.tab-button');
