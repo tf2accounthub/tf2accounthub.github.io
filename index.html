@@ -1,138 +1,525 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-    <title>tf2accounthub</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>tf2accounthub — Marketplace</title>
 
-    <style>
-        /* Make logo rounded and clean */
-        .logo img {
-            width: 120px;
-            height: 120px;
-            border-radius: 40px;
-            object-fit: cover;
-            border: 3px solid #ffffff22;
-            box-shadow: 0 0 20px #000;
-        }
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-        .logo {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5em;
-        }
+<!-- Inline overrides and marketplace styles -->
+<style>
+  :root{
+    --tf2-red:#c03a2b;
+    --tf2-blue:#2b80c0;
+    --bg:#0e0f12;
+    --card:#111216;
+    --muted:#9aa3b2;
+    --accent:#ffcd4a;
+  }
 
-        /* Better button */
-        #contact button {
-            background: #ff5722;
-            color: #fff;
-            border: none;
-            padding: 12px 22px;
-            font-size: 1.1em;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: 0.25s;
-        }
-        #contact button:hover {
-            background: #ff784e;
-            transform: scale(1.05);
-        }
-    </style>
+  /* Header + logo */
+  header#header { background: linear-gradient(135deg, rgba(192,58,43,0.06), rgba(43,128,192,0.04)); }
+  .logo { display:flex; justify-content:center; align-items:center; margin:1rem 0 0; }
+  .logo img{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      object-fit:cover;
+      border:4px solid rgba(255,255,255,0.06);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      background:linear-gradient(180deg,#111,#222);
+      display:block;
+  }
+  /* fix html5up .image.main distortions */
+  .image.main img{ width:100%; height:auto; max-height:420px; object-fit:cover; display:block; border-radius:8px; }
+
+  /* Page wide layout tweaks */
+  body { background: var(--bg); color: #e6eef6; }
+  h1, h2, h3 { color: #fff; }
+  p, li, td { color: #cfe3f6; }
+
+  /* Marketplace grid */
+  .marketbar {
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin: 0 0 1rem;
+  }
+  .searchbox {
+    flex:1 1 320px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#0b0c0e;
+    padding:8px 10px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .searchbox input{
+    background:transparent;
+    border:none;
+    outline:none;
+    color: #dbeefc;
+    font-size:14px;
+    width:100%;
+  }
+
+  .filters { display:flex; gap:8px; flex-wrap:wrap; }
+  .filters button, .actions .button{
+    background:#0f1220;
+    border:1px solid rgba(255,255,255,0.03);
+    color:#dfeeff;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .filters button.active { box-shadow: 0 4px 10px rgba(0,0,0,0.6); border-color:var(--accent); }
+
+  .market-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap:18px;
+    margin-top:14px;
+  }
+
+  .card {
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+    border-radius:12px;
+    padding:12px;
+    border:1px solid rgba(255,255,255,0.03);
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  .card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.6); }
+  .card .thumb{ height:140px; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#0b0c0e; }
+  .card .thumb img{ width:100%; height:100%; object-fit:contain; }
+
+  .card .meta { display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:8px; }
+  .card .title { font-weight:700; font-size:15px; }
+  .badge { padding:6px 8px; border-radius:999px; font-size:12px; font-weight:600; color:#081019; }
+  .price { font-weight:800; font-size:15px; }
+
+  /* Rarity colors */
+  .rarity-common{ background:#d1d1d1; color:#081019; }
+  .rarity-unique{ background:#9dd0ff; color:#041428; } /* example */
+  .rarity-rare{ background:#b57cff; color:#0b0312; }
+  .rarity-legendary{ background:linear-gradient(90deg,#ffb86b,#ff5f5f); color:#081019; }
+
+  /* TF2 split bar */
+  #tf2-split{
+    height:8px;
+    margin:16px 0;
+    border-radius:999px;
+    background: linear-gradient(90deg, var(--tf2-red) 0 50%, var(--tf2-blue) 50% 100%);
+    box-shadow: inset 0 -6px 16px rgba(0,0,0,0.6);
+  }
+
+  /* Modal */
+  .modal {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background: rgba(2,4,8,0.6); z-index:40; padding:20px;
+  }
+  .modal .panel{ width:100%; max-width:920px; background: #0d0f12; border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.03); display:flex; gap:16px; }
+  .modal .panel img{ width:360px; height:360px; object-fit:contain; border-radius:8px; background:#050607; }
+  .modal .panel .info{ flex:1; color:#dbeefc; display:flex; flex-direction:column; gap:10px; }
+  .modal .close{ margin-left:auto; cursor:pointer; border:none; background:transparent; color:#fff; font-size:18px; }
+
+  /* Responsive adjustments */
+  @media (max-width:860px){
+    .modal .panel{ flex-direction:column; align-items:center; }
+    .modal .panel img{ width:80%; height:auto; max-height:360px; }
+  }
+
+  /* small utilities */
+  .muted { color:var(--muted); font-size:13px; }
+  .controls { display:flex; gap:8px; align-items:center; }
+</style>
+
 </head>
-
 <body class="is-preload">
+
 <div id="wrapper">
 
-    <!-- Header -->
-    <header id="header">
-        <div class="logo">
-            <span class="image main">
-                <img src="images/Or5r4CP.png" alt="tf2accounthub logo" />
-            </span>
-        </div>
-
-        <div class="content">
-            <div class="inner">
-                <h1>tf2accounthub</h1>
-                <p>Your simple hub for TF2 items, cosmetics, keys, and Steam accounts.<br>
-                Clean UI, fast loading, easy navigation.</p>
-            </div>
-        </div>
-
-        <nav>
-            <ul>
-                <li><a href="#intro">Items</a></li>
-                <li><a href="#work">Cosmetics</a></li>
-                <li><a href="#about">Keys</a></li>
-                <li><a href="#contact">Accounts</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main -->
-    <div id="main">
-
-        <!-- Items -->
-        <article id="intro">
-            <h2 class="major">Items</h2>
-            <span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-
-            <p>Browse a large collection of TF2 items including weapons, tools, cases, strange items, and more. All items include clean descriptions and categorized listings for quick searching.</p>
-
-            <p>We maintain updated pricing info, item qualities, and unusual effects so you always know what you're getting before you trade.</p>
-        </article>
-
-        <!-- Cosmetics -->
-        <article id="work">
-            <h2 class="major">Cosmetics</h2>
-            <span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-
-            <p>Find hats, misc items, full sets, and themed cosmetics to customize your mercenary. Browse by class, rarity, or price range.</p>
-
-            <p>Includes high-quality previews, links to backpack.tf listings, and suggested matching cosmetic combos.</p>
-        </article>
-
-        <!-- Keys -->
-        <article id="about">
-            <h2 class="major">Keys</h2>
-            <span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-
-            <p>Keys remain the backbone of TF2 trading. Here you’ll find real-time key value updates, buy/sell ratios, and price fluctuation charts.</p>
-
-            <p>Perfect for traders looking to stay informed and get the best value on the market.</p>
-        </article>
-
-        <!-- Accounts -->
-        <article id="contact">
-            <h2 class="major">Accounts</h2>
-
-            <p>Premium, ready-to-use TF2 accounts with no trade bans, clean history, and instant delivery.</p>
-
-            <button onclick="window.location.href='premiumacc.html'">
-                TF2 Premium — FREE (was $1.99)
-            </button>
-        </article>
-
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <span class="image main">
+        <!-- circular logo: put official logo or a 1:1 crop here -->
+        <img src="images/logo-circular.png" alt="tf2accounthub logo (circular)" />
+      </span>
     </div>
 
-    <!-- Footer -->
-    <footer id="footer">
-        <p class="copyright">&copy; tf2accounthub. Template by HTML5 UP.</p>
-    </footer>
+    <div class="content">
+      <div class="inner">
+        <h1>tf2accounthub</h1>
+        <p class="muted">Fast, clean TF2 marketplace — items, cosmetics, keys, and account listings. Use the marketplace below to filter and sort items.</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#market">Market</a></li>
+        <li><a href="#items">Items</a></li>
+        <li><a href="#about">Keys</a></li>
+        <li><a href="#contact">Accounts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="tf2-split" aria-hidden="true"></div>
+
+  <!-- Main -->
+  <div id="main">
+    <!-- Marketplace -->
+    <article id="market">
+      <h2 class="major">Marketplace</h2>
+
+      <div class="marketbar" role="region" aria-label="market controls">
+        <div class="searchbox" title="Search items">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.7"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35" /><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
+          <input id="search" placeholder="Search items, classes, attributes..." aria-label="Search items" />
+        </div>
+
+        <div class="filters" role="toolbar" aria-label="Filters">
+          <button class="filter-btn" data-filter-type="class" data-filter-value="all">All classes</button>
+          <button class="filter-btn" data-filter-type="class" data-filter-value="Scout">Scout</button>
+          <button class="filter-btn" data-filter-type="class" data-filter-value="Soldier">Soldier</button>
+          <button class="filter-btn" data-filter-type="class" data-filter-value="Demo">Demoman</button>
+          <button class="filter-btn" data-filter-type="class" data-filter-value="Pyro">Pyro</button>
+          <button class="filter-btn" data-filter-type="quality" data-filter-value="all">Any quality</button>
+          <button class="filter-btn" data-filter-type="quality" data-filter-value="Unique">Unique</button>
+          <button class="filter-btn" data-filter-type="quality" data-filter-value="Unusual">Unusual</button>
+        </div>
+
+        <div class="controls" style="margin-left:auto;">
+          <select id="sort" aria-label="Sort items">
+            <option value="price-asc">Price ↑</option>
+            <option value="price-desc">Price ↓</option>
+            <option value="name-asc">Name A–Z</option>
+            <option value="rarity-desc">Rarity</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- grid -->
+      <div id="market-grid" class="market-grid" aria-live="polite"></div>
+
+      <!-- Empty / loading -->
+      <p id="empty-message" class="muted" style="display:none; margin-top:18px;">No items match your filters.</p>
+
+    </article>
+
+    <!-- Items / example content kept for SEO -->
+    <article id="items">
+      <h2 class="major">Items</h2>
+      <p class="muted">Browse items by class—each card shows price, quality, and a short description.</p>
+      <div class="table-wrapper" style="margin-top:12px;">
+        <table class="alt" style="width:100%;">
+          <thead>
+            <tr><th>Name</th><th>Description</th><th>Price</th></tr>
+          </thead>
+          <tbody id="items-table">
+            <!-- populated by JS for accessibility -->
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <!-- About Keys -->
+    <article id="about">
+      <h2 class="major">Keys</h2>
+      <p>Tooling and key value tracking help traders always know real-time approximate key values. This demo version uses static sample prices — integrate with a backend or an API for live values.</p>
+    </article>
+
+    <!-- Accounts CTA -->
+    <article id="contact">
+      <h2 class="major">Accounts</h2>
+      <p class="muted">Premium account listings appear here with delivery and history details.</p>
+      <div class="actions" style="margin-top:12px;">
+        <a class="button primary" href="premiumacc.html">View Premium Accounts</a>
+        <a class="button" href="#contact-form">Contact Seller</a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <p class="muted">&copy; tf2accounthub — Template adapted from HTML5 UP</p>
+  </footer>
 
 </div>
 
-<!-- Background -->
-<div id="bg"></div>
+<!-- Item details modal -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="panel" role="document">
+    <button class="close" id="modal-close" title="Close">✕</button>
+    <img id="modal-img" src="" alt="Item preview" />
+    <div class="info">
+      <h3 id="modal-name">Item Name</h3>
+      <div id="modal-meta" class="muted">Class • Quality</div>
+      <div id="modal-desc" style="line-height:1.45">Longer description of the item goes here. Includes effects, unusual effects, and other metadata.</div>
+      <div style="margin-top:auto; display:flex; gap:10px; align-items:center;">
+        <div class="price" id="modal-price">0.00</div>
+        <button class="button primary" id="buy-now">Buy Now</button>
+        <button class="button" id="add-watch">Add to Watchlist</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- Scripts -->
+<!-- scripts -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/browser.min.js"></script>
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script>
+/* -------------------------
+   Sample item dataset
+   Replace image paths with your official TF2 renders in /images/
+   I included varied rarities and classes for demonstration.
+   ------------------------- */
+const ITEMS = [
+  {
+    id:1,
+    name:"Festive Scattergun",
+    class:"Scout",
+    quality:"Unusual",
+    rarity:"legendary",
+    price:29.99,
+    img:"images/festive_scattergun.png",
+    desc:"Festive Scattergun with special unusual effect. Great for collectors and demo loadouts."
+  },
+  {
+    id:2,
+    name:"Rocket Launcher",
+    class:"Soldier",
+    quality:"Unique",
+    rarity:"unique",
+    price:5.49,
+    img:"images/rocket_launcher.png",
+    desc:"Standard Rocket Launcher used by Soldiers. Solid DPS and reliable."
+  },
+  {
+    id:3,
+    name:"Demoman's Eyelander",
+    class:"Demoman",
+    quality:"Unique",
+    rarity:"rare",
+    price:24.00,
+    img:"images/eyelander.png",
+    desc:"Eyelander — collect heads and gain strength. Classic demoman item."
+  },
+  {
+    id:4,
+    name:"Pyro's Dragonborn Addition",
+    class:"Pyro",
+    quality:"Unusual",
+    rarity:"legendary",
+    price:75.00,
+    img:"images/dragonborn_pyro.png",
+    desc:"Rare dragon-themed cosmetic with glowing effect."
+  },
+  {
+    id:5,
+    name:"Strange Shotgun",
+    class:"Soldier",
+    quality:"Strange",
+    rarity:"rare",
+    price:12.50,
+    img:"images/strange_shotgun.png",
+    desc:"Tracks kills and shows rarity—popular for stat tracking."
+  },
+  {
+    id:6,
+    name:"Vintage Hat",
+    class:"All",
+    quality:"Unique",
+    rarity:"common",
+    price:2.99,
+    img:"images/vintage_hat.png",
+    desc:"Classic pipe hat — small aesthetic item."
+  }
+];
+
+/* -------------------------
+   Marketplace app
+   ------------------------- */
+const state = {
+  items: ITEMS.slice(),
+  filters: { class: 'all', quality: 'all', qtext: '' },
+  sort: 'price-asc'
+};
+
+const grid = document.getElementById('market-grid');
+const tableBody = document.getElementById('items-table');
+const emptyMessage = document.getElementById('empty-message');
+
+function rarityLabel(r){
+  switch(r){
+    case 'legendary': return 'Legendary';
+    case 'rare': return 'Rare';
+    case 'unique': return 'Unique';
+    default: return 'Common';
+  }
+}
+function rarityClass(r){
+  switch(r){
+    case 'legendary': return 'rarity-legendary';
+    case 'rare': return 'rarity-rare';
+    case 'unique': return 'rarity-unique';
+    default: return 'rarity-common';
+  }
+}
+
+function renderGrid(){
+  const f = state.filters;
+  const q = (f.qtext||'').toLowerCase().trim();
+
+  let list = state.items.filter(it=>{
+    if(f.class !== 'all' && it.class !== f.class) return false;
+    if(f.quality !== 'all' && it.quality !== f.quality) return false;
+    if(q){
+      const hay = (it.name + ' ' + it.desc + ' ' + it.class + ' ' + it.quality).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  // sort
+  const sort = state.sort;
+  list.sort((a,b)=>{
+    if(sort === 'price-asc') return a.price - b.price;
+    if(sort === 'price-desc') return b.price - a.price;
+    if(sort === 'name-asc') return a.name.localeCompare(b.name);
+    if(sort === 'rarity-desc') return (raritySort(b.rarity) - raritySort(a.rarity));
+    return 0;
+  });
+
+  // populate grid
+  grid.innerHTML = '';
+  tableBody.innerHTML = '';
+  if(list.length === 0){
+    emptyMessage.style.display = 'block';
+  } else {
+    emptyMessage.style.display = 'none';
+  }
+
+  list.forEach(it=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="thumb"><img src="${it.img}" alt="${it.name} preview" loading="lazy" onerror="this.onerror=null;this.src='images/placeholder.png'"></div>
+      <div class="meta">
+        <div>
+          <div class="title">${it.name}</div>
+          <div class="muted" style="font-size:13px;">${it.class} · ${it.quality}</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="badge ${rarityClass(it.rarity)}">${rarityLabel(it.rarity)}</div>
+          <div class="price">€${it.price.toFixed(2)}</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <button class="button" data-action="view" data-id="${it.id}">View</button>
+        <button class="button primary" data-action="buy" data-id="${it.id}">Buy</button>
+      </div>
+    `;
+    grid.appendChild(card);
+
+    // table row for accessibility / SEO
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${it.name}</td><td>${escapeHtml(it.desc)}</td><td>€${it.price.toFixed(2)}</td>`;
+    tableBody.appendChild(tr);
+  });
+}
+
+function raritySort(r){
+  switch(r){
+    case 'legendary': return 4;
+    case 'rare': return 3;
+    case 'unique': return 2;
+    default: return 1;
+  }
+}
+
+function escapeHtml(s){ return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* Controls */
+document.getElementById('search').addEventListener('input', e=>{
+  state.filters.qtext = e.target.value;
+  renderGrid();
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const type = btn.dataset.filterType;
+    const val = btn.dataset.filterValue;
+    // toggle style: if we click same filter we set it
+    if(type && val){
+      state.filters[type] = val;
+      // ui: mark active only for the same type (simple behaviour)
+      document.querySelectorAll(`.filter-btn[data-filter-type="${type}"]`).forEach(el=>el.classList.remove('active'));
+      btn.classList.add('active');
+      renderGrid();
+    }
+  });
+});
+
+document.getElementById('sort').addEventListener('change', e=>{
+  state.sort = e.target.value;
+  renderGrid();
+});
+
+/* actions (view / buy) */
+grid.addEventListener('click', (ev)=>{
+  const btn = ev.target.closest('button');
+  if(!btn) return;
+  const action = btn.dataset.action;
+  const id = Number(btn.dataset.id);
+  const item = state.items.find(i=>i.id===id);
+  if(!item) return;
+  if(action === 'view') openModal(item);
+  if(action === 'buy') alert('Buy flow not implemented in demo. Item: ' + item.name + ' — price: €' + item.price.toFixed(2));
+});
+
+/* modal logic */
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const modalName = document.getElementById('modal-name');
+const modalMeta = document.getElementById('modal-meta');
+const modalDesc = document.getElementById('modal-desc');
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+function openModal(item){
+  modalImg.src = item.img;
+  modalImg.alt = item.name + ' preview';
+  modalName.textContent = item.name;
+  modalMeta.textContent = item.class + ' · ' + item.quality + ' · ' + rarityLabel(item.rarity);
+  modalDesc.textContent = item.desc;
+  document.getElementById('modal-price').textContent = '€' + item.price.toFixed(2);
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden','false');
+}
+function closeModal(){
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden','true');
+}
+
+/* initial render */
+renderGrid();
+
+/* make first filter active (All classes) */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  if(btn.dataset.filterType==='class' && btn.dataset.filterValue==='all') btn.classList.add('active');
+  if(btn.dataset.filterType==='quality' && btn.dataset.filterValue==='all') btn.classList.add('active');
+});
+</script>
 
 </body>
 </html>
