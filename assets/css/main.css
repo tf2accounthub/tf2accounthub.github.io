@@ -1659,12 +1659,14 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
-
-/* Round header logo + y-offset */
+/* Force round logo */
 #header .logo .image.main img {
-    width: 160px;          /* adjust size */
-    height: 160px;         /* match for perfect circle */
-    object-fit: cover;     /* clean crop */
-    border-radius: 50%;    /* makes circle */
-    transform: translateY(-20px); /* move up/down */
+    width: 160px !important;
+    height: 160px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    transform: translateY(-20px) !important;
+    display: block !important;
 }
+
+
