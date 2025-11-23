@@ -15,7 +15,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a1d22; /* Dark background */
+            background-color: #111317; /* Darker background */
             color: #e0e0e0;
         }
 
@@ -32,7 +32,7 @@
         /* Custom scrollbar for inventory */
         .inventory-grid {
             scrollbar-width: thin;
-            scrollbar-color: #f97316 #374151;
+            scrollbar-color: #6366f1 #374151; /* Updated to indigo */
         }
         .inventory-grid::-webkit-scrollbar {
             width: 8px;
@@ -42,18 +42,13 @@
             border-radius: 10px;
         }
         .inventory-grid::-webkit-scrollbar-thumb {
-            background-color: #f97316;
+            background-color: #6366f1; /* Updated to indigo */
             border-radius: 10px;
             border: 2px solid #374151;
         }
 
-        /* Glassmorphism effect for modals and cards */
-        .glass-card {
-            background: rgba(41, 46, 55, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        /* Glassmorphism effect for modals and cards (REMOVED) */
+        /* .glass-card { ... } */
 
         /* Disable scroll snapping on the main body for modal view */
         .modal-open {
@@ -70,20 +65,20 @@
                 <div class="flex justify-between items-center h-16">
                     <!-- Logo/Brand -->
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="text-2xl font-bold text-white">tf2<span class="text-orange-500">accounts</span></span>
+                        <span class="text-2xl font-bold text-white">tf2<span class="text-indigo-400">accounts</span></span>
                     </div>
                     
                     <!-- Navigation Links -->
                     <div class="hidden md:flex md:items-center md:space-x-6">
-                        <a href="#" class="text-gray-300 hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Trade</a>
-                        <a href="#" class="text-gray-300 hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Buy</a>
-                        <a href="#" class="text-gray-300 hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Sell</a>
-                        <a href="#" class="text-gray-300 hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Support</a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Trade</a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Buy</a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Sell</a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Support</a>
                     </div>
                     
                     <!-- Login Button -->
                     <div class="flex items-center">
-                        <button id="loginButton" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-2">
+                        <button id="loginButton" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.063 4.937A9.957 9.957 0 0012 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10a9.957 9.957 0 00-2.937-7.063zM12 4c2.19 0 4.2.78 5.8 2.08L5.12 18.76A7.957 7.957 0 014 12c0-4.41 3.59-8 8-8zm0 16c-2.19 0-4.2-.78-5.8-2.08L18.88 5.24A7.957 7.957 0 0120 12c0 4.41-3.59 8-8 8zm-4-8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>
                             <span>Login with Steam</span>
                         </button>
@@ -103,18 +98,23 @@
             <!-- Hero Section -->
             <div class="relative pt-16 pb-24 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900/80 to-transparent opacity-75"></div>
+                
+                <!-- Blurry background shapes -->
+                <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/30 rounded-full filter blur-3xl opacity-50 animate-pulse-slow"></div>
+                <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-purple-600/30 rounded-full filter blur-3xl opacity-50 animate-pulse-slow animation-delay-4000"></div>
+
                 <!-- You could place a subtle TF2 background image here -->
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
                     <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight">
-                        The Future of <span class="text-orange-500">TF2 Trading</span> is Here.
+                        The Future of <span class="text-indigo-400">TF2 Trading</span> is Here.
                     </h1>
                     <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
                         Securely trade, buy, and sell your Team Fortress 2 items. Instant, reliable, and user-friendly.
                     </p>
                     <div class="mt-10 max-w-xl mx-auto">
                         <form class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" placeholder="Search for any item... (e.g., 'Unusual Team Captain')" class="flex-grow w-full px-5 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
-                            <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-200">
+                            <input type="text" placeholder="Search for any item... (e.g., 'Unusual Team Captain')" class="flex-grow w-full px-5 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                            <button type="submit" class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-200 border border-indigo-500/50">
                                 Search
                             </button>
                         </form>
@@ -123,7 +123,7 @@
             </div>
 
             <!-- Featured Items Section -->
-            <div class="bg-gray-900 py-16">
+            <div class="bg-transparent py-16">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl font-bold text-center text-white mb-10">Featured Items</h2>
                     <div id="featured-items-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
@@ -137,7 +137,7 @@
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Tab Buttons -->
                     <div class="flex justify-center border-b border-gray-700 mb-12">
-                        <button data-tab="trade" class="tab-button text-lg font-semibold px-6 py-4 border-b-2 border-orange-500 text-orange-500 transition-all">Trade</button>
+                        <button data-tab="trade" class="tab-button text-lg font-semibold px-6 py-4 border-b-2 border-indigo-500 text-indigo-400 transition-all">Trade</button>
                         <button data-tab="buy" class="tab-button text-lg font-semibold px-6 py-4 border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition-all">Buy</button>
                         <button data-tab="sell" class="tab-button text-lg font-semibold px-6 py-4 border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition-all">Sell</button>
                     </div>
@@ -148,37 +148,37 @@
                         <div id="tab-trade" class="tab-content">
                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                                 <!-- Your Inventory -->
-                                <div class="lg:col-span-1 glass-card rounded-lg shadow-xl p-6">
+                                <div class="lg:col-span-1 bg-gray-900 border border-gray-700/50 rounded-lg shadow-xl p-6">
                                     <h3 class="text-2xl font-semibold text-white mb-4">Your Inventory</h3>
                                     <input type="text" placeholder="Search your items..." class="w-full px-4 py-2 mb-4 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
                                     <div id="your-inventory" class="inventory-grid grid grid-cols-3 sm:grid-cols-4 gap-3 h-96 overflow-y-auto pr-2">
                                         <!-- Your mock items here -->
                                     </div>
                                     <div class="text-center mt-4 pt-4 border-t border-gray-700">
-                                        <p class="text-lg font-medium text-white">Your Offer Value: <span class="text-green-400">$125.50</span></p>
+                                        <p class="text-lg font-medium text-white">Your Offer Value: <span class="text-indigo-300">$125.50</span></p>
                                     </div>
                                 </div>
 
                                 <!-- Trade Controls -->
                                 <div class="lg:col-span-1 flex flex-col items-center justify-center h-full text-center px-6">
-                                    <svg class="w-20 h-20 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m4 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                                    <svg class="w-20 h-20 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m4 6H4m0 0l4 4m-4-4l4-4"></path></svg>
                                     <h4 class="text-2xl font-bold text-white mt-4">Create Your Trade</h4>
                                     <p class="text-gray-400 mt-2 mb-6">Select items from both inventories to build your trade offer.</p>
-                                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold px-10 py-3 rounded-lg shadow-lg transition-all text-lg">
+                                    <button class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold px-10 py-3 rounded-lg shadow-lg transition-all text-lg border border-indigo-500/50">
                                         Send Trade Offer
                                     </button>
                                     <p class="text-sm text-gray-500 mt-4">You will be asked to confirm on Steam.</p>
                                 </div>
 
                                 <!-- Partner's Inventory -->
-                                <div class="lg:col-span-1 glass-card rounded-lg shadow-xl p-6">
+                                <div class="lg:col-span-1 bg-gray-900 border border-gray-700/50 rounded-lg shadow-xl p-6">
                                     <h3 class="text-2xl font-semibold text-white mb-4">Partner's Inventory</h3>
                                     <input type="text" placeholder="Search partner's items..." class="w-full px-4 py-2 mb-4 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
                                     <div id="partner-inventory" class="inventory-grid grid grid-cols-3 sm:grid-cols-4 gap-3 h-96 overflow-y-auto pr-2">
                                         <!-- Partner's mock items here -->
                                     </div>
                                     <div class="text-center mt-4 pt-4 border-t border-gray-700">
-                                        <p class="text-lg font-medium text-white">Partner's Offer Value: <span class="text-green-400">$120.00</span></p>
+                                        <p class="text-lg font-medium text-white">Partner's Offer Value: <span class="text-indigo-300">$120.00</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -188,12 +188,12 @@
                         <div id="tab-buy" class="tab-content hidden">
                             <div class="flex flex-col md:flex-row gap-8">
                                 <!-- Filters -->
-                                <aside class="w-full md:w-1/4 lg:w-1/5 glass-card rounded-lg shadow-lg p-6 self-start">
+                                <aside class="w-full md:w-1/4 lg:w-1/5 bg-gray-900 border border-gray-700/50 rounded-lg shadow-lg p-6 self-start">
                                     <h4 class="text-xl font-semibold text-white mb-5">Filters</h4>
                                     <!-- Class Filter -->
                                     <div>
                                         <label class="text-sm font-medium text-gray-300">Class</label>
-                                        <select class="w-full mt-1 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                        <select class="w-full mt-1 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                             <option>All Classes</option>
                                             <option>Scout</option>
                                             <option>Soldier</option>
@@ -204,7 +204,7 @@
                                     <!-- Quality Filter -->
                                     <div class="mt-4">
                                         <label class="text-sm font-medium text-gray-300">Quality</label>
-                                        <select class="w-full mt-1 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                        <select class="w-full mt-1 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                             <option>All Qualities</option>
                                             <option>Unusual</option>
                                             <option>Strange</option>
@@ -216,11 +216,11 @@
                                     <div class="mt-4">
                                         <label class="text-sm font-medium text-gray-300">Price Range</label>
                                         <div class="flex items-center space-x-2 mt-1">
-                                            <input type="number" placeholder="Min" class="w-1/2 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                                            <input type="number" placeholder="Max" class="w-1/2 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                            <input type="number" placeholder="Min" class="w-1/2 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                            <input type="number" placeholder="Max" class="w-1/2 px-3 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                         </div>
                                     </div>
-                                    <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold mt-6 py-2 rounded-lg transition-all">Apply Filters</button>
+                                    <button class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold mt-6 py-2 rounded-lg transition-all border border-indigo-500/50">Apply Filters</button>
                                 </aside>
                                 <!-- Item Grid -->
                                 <div class="w-full md:w-3/4 lg:w-4/5">
@@ -236,12 +236,13 @@
                             <div class="text-center max-w-2xl mx-auto">
                                 <h3 class="text-3xl font-bold text-white mb-4">Sell Your Items</h3>
                                 <p class="text-lg text-gray-400 mb-8">Select items from your inventory to list them on the marketplace. Set your price and get paid.</p>
-                                <div class="glass-card rounded-lg shadow-xl p-8">
+                                <div class="bg-gray-900 border border-gray-700/50 rounded-lg shadow-xl p-8">
                                     <h4 class="text-2xl font-semibold text-white mb-6">Your Sellable Inventory</h4>
+                                    <div id="sell-inventory" class="inventory-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 h-96 overflow-y-auto pr-2 mb-6">
                                     <div id="sell-inventory" class="inventory-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 h-96 overflow-y-auto pr-2 mb-6">
                                         <!-- Your sellable items here -->
                                     </div>
-                                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-3 rounded-lg shadow-lg transition-all text-lg">
+                                    <button class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold px-10 py-3 rounded-lg shadow-lg transition-all text-lg border border-indigo-500/50">
                                         List Selected Items (0)
                                     </button>
                                 </div>
@@ -258,14 +259,14 @@
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="text-center md:text-left mb-4 md:mb-0">
-                        <span class="text-lg font-bold text-white">tf2<span class="text-orange-500">accounts</span></span>
+                        <span class="text-lg font-bold text-white">tf2<span class="text-indigo-400">accounts</span></span>
                         <p class="text-gray-400 text-sm mt-1">&copy; 2025 tf2accounts. All rights reserved.</p>
                         <p class="text-gray-500 text-xs mt-2">Not affiliated with Valve, Steam, or Team Fortress 2.</p>
                     </div>
                     <div class="flex space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Privacy Policy</a>
-                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Terms of Service</a>
-                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Steam Group</a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Steam Group</a>
                     </div>
                 </div>
             </div>
@@ -275,13 +276,13 @@
 
     <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
-        <div id="loginModalContent" class="glass-card rounded-lg shadow-2xl w-full max-w-md p-8 transform transition-all opacity-0 scale-95">
+        <div id="loginModalContent" class="bg-gray-900 border border-gray-700/50 rounded-lg shadow-2xl w-full max-w-md p-8 transform transition-all opacity-0 scale-95">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-semibold text-white">Login Required</h3>
                 <button id="closeLoginModal" class="text-gray-400 hover:text-white transition-colors">&times;</button>
             </div>
             <p class="text-gray-300 mb-6">Please log in with your Steam account to access trading, buying, and selling features.</p>
-            <button class="w-full flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition-all text-lg">
+            <button class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition-all text-lg border border-indigo-500/50">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.063 4.937A9.957 9.957 0 0012 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10a9.957 9.957 0 00-2.937-7.063zM12 4c2.19 0 4.2.78 5.8 2.08L5.12 18.76A7.957 7.957 0 014 12c0-4.41 3.59-8 8-8zm0 16c-2.19 0-4.2-.78-5.8-2.08L18.88 5.24A7.957 7.957 0 0120 12c0 4.41-3.59 8-8 8zm-4-8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>
                 <span>Sign in with Steam</span>
             </button>
@@ -291,7 +292,7 @@
     
     <!-- Item Details Modal -->
     <div id="itemModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
-        <div id="itemModalContent" class="glass-card rounded-lg shadow-2xl w-full max-w-lg p-6 transform transition-all opacity-0 scale-95">
+        <div id="itemModalContent" class="bg-gray-900 border border-gray-700/50 rounded-lg shadow-2xl w-full max-w-lg p-6 transform transition-all opacity-0 scale-95">
             <!-- Content will be injected by JS -->
         </div>
     </div>
@@ -300,18 +301,18 @@
         // --- MOCK DATA ---
         // In a real app, this data would come from an API
         const mockItems = [
-            { id: 1, name: 'Mann Co. Supply Crate Key', quality: 'unique', price: 2.50, img: 'https://placehold.co/128x128/333/FFF?text=Key' },
-            { id: 2, name: 'Unusual Team Captain (Burning)', quality: 'unusual', price: 1200.00, img: 'https://placehold.co/128x128/333/FFF?text=Team+Captain' },
-            { id: 3, name: 'Refined Metal', quality: 'unique', price: 0.05, img: 'https://placehold.co/128x128/333/FFF?text=Refined' },
-            { id: 4, name: 'Strange Rocket Launcher', quality: 'strange', price: 1.50, img: 'https://placehold.co/128x128/333/FFF?text=Rocket+Launcher' },
-            { id: 5, name: 'Vintage Bill\'s Hat', quality: 'vintage', price: 5.00, img: 'https://placehold.co/128x128/333/FFF?text=Bill%27s+Hat' },
-            { id: 6, name: 'Genuine Frying Pan', quality: 'genuine', price: 3.00, img: 'https://placehold.co/128x128/333/FFF?text=Frying+Pan' },
-            { id: 7, name: 'Collector\'s Medi Gun', quality: 'collectors', price: 25.00, img: 'https://placehold.co/128x128/333/FFF?text=Medi+Gun' },
-            { id: 8, name: 'Haunted Ghosts Gibbus', quality: 'haunted', price: 0.50, img: 'https://placehold.co/128x128/333/FFF?text=Gibbus' },
-            { id: 9, name: 'Australium Minigun', quality: 'strange', price: 45.00, img: 'https://placehold.co/128x128/333/FFF?text=Aussie+Minigun' },
-            { id: 10, name: 'Earbuds', quality: 'unique', price: 4.00, img: 'https://placehold.co/128x128/333/FFF?text=Buds' },
-            { id: 11, name: 'Black Rose', quality: 'unique', price: 1.20, img: 'https://placehold.co/128x128/333/FFF?text=Black+Rose' },
-            { id: 12, name: 'Normal Scattergun', quality: 'normal', price: 0.01, img: 'https://placehold.co/128x128/333/FFF?text=Scattergun' },
+            { id: 1, name: 'Mann Co. Supply Crate Key', quality: 'unique', price: 2.50, img: 'https://placehold.co/128x128/333/eee?text=Key' },
+            { id: 2, name: 'Unusual Team Captain (Burning)', quality: 'unusual', price: 1200.00, img: 'https://placehold.co/128x128/333/eee?text=Hat' },
+            { id: 3, name: 'Refined Metal', quality: 'unique', price: 0.05, img: 'https://placehold.co/128x128/333/eee?text=Metal' },
+            { id: 4, name: 'Strange Rocket Launcher', quality: 'strange', price: 1.50, img: 'https://placehold.co/128x128/333/eee?text=Gun' },
+            { id: 5, name: 'Vintage Bill\'s Hat', quality: 'vintage', price: 5.00, img: 'https://placehold.co/128x128/333/eee?text=Hat' },
+            { id: 6, name: 'Genuine Frying Pan', quality: 'genuine', price: 3.00, img: 'https://placehold.co/128x128/333/eee?text=Pan' },
+            { id: 7, name: 'Collector\'s Medi Gun', quality: 'collectors', price: 25.00, img: 'https://placehold.co/128x128/333/eee?text=Medi+Gun' },
+            { id: 8, name: 'Haunted Ghosts Gibbus', quality: 'haunted', price: 0.50, img: 'https://placehold.co/128x128/333/eee?text=Gibbus' },
+            { id: 9, name: 'Australium Minigun', quality: 'strange', price: 45.00, img: 'https://placehold.co/128x128/333/eee?text=Aussie' },
+            { id: 10, name: 'Earbuds', quality: 'unique', price: 4.00, img: 'https://placehold.co/128x128/333/eee?text=Buds' },
+            { id: 11, name: 'Black Rose', quality: 'unique', price: 1.20, img: 'https://placehold.co/128x128/333/eee?text=Rose' },
+            { id: 12, name: 'Normal Scattergun', quality: 'normal', price: 0.01, img: 'https://placehold.co/128x128/333/eee?text=Gun' },
         ];
 
         // --- UTILITY FUNCTIONS ---
@@ -323,9 +324,9 @@
          * @returns {string} - The HTML string for the item card.
          */
         function createItemCard(item, showPrice = false) {
-            const priceTag = showPrice ? `<div class="absolute top-1 right-1 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-md">$${item.price.toFixed(2)}</div>` : '';
+            const priceTag = showPrice ? `<div class="absolute top-1 right-1 bg-indigo-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-md">$${item.price.toFixed(2)}</div>` : '';
             return `
-                <div class="item-card relative glass-card rounded-lg overflow-hidden shadow-lg transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-xl cursor-pointer border-2 ${'quality-' + item.quality}" data-item-id="${item.id}">
+                <div class="item-card relative bg-gray-900 border border-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-xl cursor-pointer border-2 ${'quality-' + item.quality}" data-item-id="${item.id}">
                     <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square object-cover" onerror="this.src='https://placehold.co/128x128/222/FFF?text=Error'; this.onerror=null;">
                     <div class="absolute bottom-0 left-0 right-0 p-2 bg-black/50 backdrop-blur-sm">
                         <p class="text-white text-xs font-medium truncate" title="${item.name}">${item.name}</p>
@@ -342,7 +343,7 @@
          */
         function createInventoryItem(item) {
              return `
-                <div class="item-card relative rounded-md overflow-hidden transition-all duration-200 hover:transform hover:scale-105 cursor-pointer border-2 ${'quality-' + item.quality} bg-gray-800/50" data-item-id="${item.id}">
+                <div class="item-card relative rounded-md overflow-hidden transition-all duration-200 hover:transform hover:scale-105 cursor-pointer border-2 ${'quality-' + item.quality} bg-gray-900" data-item-id="${item.id}">
                     <img src="${item.img}" alt="${item.name}" class="w-full h-auto aspect-square object-cover" onerror="this.src='https://placehold.co/128x128/222/FFF?text=Error'; this.onerror=null;">
                 </div>
             `;
@@ -373,10 +374,10 @@
                         </div>
                         
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                            <span class="text-3xl font-bold text-green-400">$${item.price.toFixed(2)}</span>
+                            <span class="text-3xl font-bold text-indigo-300">$${item.price.toFixed(2)}</span>
                             <div class="flex space-x-3">
-                                <button class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-lg transition-all">Add to Cart</button>
-                                <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition-all">Make Offer</button>
+                                <button class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold px-6 py-2 rounded-lg transition-all border border-indigo-500/50">Add to Cart</button>
+                                <button class="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-6 py-2 rounded-lg transition-all">Make Offer</button>
                             </div>
                         </div>
                     </div>
@@ -478,10 +479,10 @@
 
                     // Update button styles
                     tabButtons.forEach(btn => {
-                        btn.classList.remove('text-orange-500', 'border-orange-500');
+                        btn.classList.remove('text-indigo-400', 'border-indigo-500');
                         btn.classList.add('text-gray-400', 'border-transparent');
                     });
-                    button.classList.add('text-orange-500', 'border-orange-500');
+                    button.classList.add('text-indigo-400', 'border-indigo-500');
                     button.classList.remove('text-gray-400', 'border-transparent');
 
                     // Show/hide content
